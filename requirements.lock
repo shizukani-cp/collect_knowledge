@@ -9,3 +9,18 @@
 #   generate-hashes: false
 
 -e file:.
+gensim==4.3.2
+    # via collect-knowledge
+numpy==1.26.4
+    # via collect-knowledge
+    # via gensim
+    # via scipy
+scipy==1.12.0
+    # via collect-knowledge
+    # via gensim
+smart-open==7.0.4
+    # via collect-knowledge
+    # via gensim
+wrapt==1.16.0
+    # via collect-knowledge
+    # via smart-open
