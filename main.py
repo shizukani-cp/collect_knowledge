@@ -9,9 +9,10 @@ args = parser.parse_args()
 
 wv = KeyedVectors.load_word2vec_format('wiki.model', binary=True)
 try:
-    r = wv.most_similar(positive=args.keyword, topn=args.num)
+    r = wv.most_similar(positive=args.keyword, topn=args.num - 1)
 except KeyError:
     sys.exit("word not found")
+r = [args.keyword] + r
 
 datas = ""
 for w, _ in r:
