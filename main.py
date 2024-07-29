@@ -1,4 +1,5 @@
 import argparse, sys
+import requests
 from gensim.models import KeyedVectors
 
 parser = argparse.ArgumentParser()
@@ -11,5 +12,21 @@ try:
     r = wv.most_similar(positive=args.keyword, topn=args.num)
 except KeyError:
     sys.exit("word not found")
+
+datas = ""
 for w, _ in r:
-    print(f"https://ja.wikipedia.org/wiki/{w}")
+    url = "https://ja.wikipedia.org/api/rest_v1/page/summary/" + w
+    try:
+        # APIにリクエストを送信してデータを取得
+        response = requests.get(url)
+        data = response.json()
+
+        # サマリーの取得
+        if 'extract' in data:
+            datas += data['extract']
+            print(data["extract"])
+        else:
+            sys.exit(f"{w}の情報が見つかりませんでした。")
+
+    except requests.exceptions.RequestException as e:
+        sys.exit("エラーが発生しました: " + str(e))
