@@ -14,17 +14,14 @@ except KeyError:
     sys.exit("word not found")
 r = [args.keyword] + r
 
-datas = ""
 for w, _ in r:
     url = "https://ja.wikipedia.org/api/rest_v1/page/summary/" + w
     try:
         # APIにリクエストを送信してデータを取得
         response = requests.get(url)
         data = response.json()
-
         # サマリーの取得
         if 'extract' in data:
-            datas += data['extract']
             print(data["extract"])
         else:
             sys.exit(f"{w}の情報が見つかりませんでした。")
