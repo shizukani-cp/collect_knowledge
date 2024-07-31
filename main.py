@@ -12,7 +12,7 @@ try:
     r = wv.most_similar(positive=args.keyword, topn=args.num - 1)
 except KeyError:
     sys.exit("word not found")
-r = [args.keyword] + r
+r = [(args.keyword, 1)] + r
 
 for w, _ in r:
     url = "https://ja.wikipedia.org/api/rest_v1/page/summary/" + w
