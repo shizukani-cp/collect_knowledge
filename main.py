@@ -22,6 +22,7 @@ for w, _ in r:
         data = response.json()
         # サマリーの取得
         if 'extract' in data:
+            print("https://ja.wikipedia.org/wiki/" + w)
             print(data["extract"])
         else:
             sys.exit(f"{w}の情報が見つかりませんでした。")
